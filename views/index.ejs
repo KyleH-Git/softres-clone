@@ -5,9 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soft-Res It</title>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="../script.js"></script>
+    <script defer src="/js/script.js"></script>
 </head>
 <body>
+    <h1>Hello!</h1>
+    Form for user info
+
+    Display of current players with resd items
     
+    Display of items with who has resd them
+
+    <ul>
+        <% for(item of items) { %>
+            <li><%= item.name %> <%= item.restricted %> <%= item.slot %> <%= item.ilvl %> <%=item.from %> <%= item.softResdBy %></li>
+        <% } %>
+    </ul>
+    <ul>
+        <% for(user of users) { %>
+            <li><%=user.username %> <%= user.note %> <%= user.class %> <%= user.spec %> <%=user.softresd %> </li>
+        <% } %>
+    </ul>
 </body>
 </html>

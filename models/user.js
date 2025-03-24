@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
 });
 
 //create a a new collection in the DB, store it to a js object for export
-const user = mongoose.Model('Users', userSchema);
+const user = mongoose.model('User', userSchema);
 
 //export the schema to be used in other files
 module.exports = user;
