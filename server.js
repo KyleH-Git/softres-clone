@@ -43,15 +43,54 @@ const User = require('./models/user.js');
 //Import the Item model defined in the item schema to gain access to it's collection
 const Item = require('./models/item.js');
 
-// ***** Define Controller for Routes/HTTPS Requests *****
+// ***** Define Controllers for Routes/HTTPS Requests *****
 
 // GET / - display the homepage for site, getting all users who have a stored SR
 app.get('/', async (req, res) => {
     const allUsers = await User.find();
     const allItems = await Item.find();
+    for(foundUser of allUsers){
+        item1 = foundUser.softresd.substring(0, foundUser.softresd.indexOf(' '));
+        item2 = foundUser.softresd.substring(foundUser.softresd.indexOf(' ') + 1);
+        foundUser.softresd = '';
+        for(foundItem of allItems){
+            if(item1 == foundItem._id || item2 == foundItem._id)
+                foundUser.softresd += foundItem.name + ' ';
+        }
+    }
     res.render('index.ejs', {users: allUsers, items: allItems});
 });
 
+// GET /users/:userId - display the specified users information
+app.get('/user/:userId', async (req, res) => {
+    const specifiedUSer = await User.findById(req.params.userId);
+    res.render('mySoftRes.ejs', {user: specifiedUSer});
+});
+
+// POST /users/newSR - store the data from the req obj in the DB and redirect user to homepage
+app.post('/createSR', async (req,res) => {
+    await User.create(req.body);
+    res.redirect('/');
+});
+
+// GET /users/:userId/edit - show form to user with data pre filled with their current dB values
+app.get('/users/:userId/edit', async (req, res) => {
+    const specifiedUser = await User.findById(req.params.userId);
+    const allItems = await Item.find();
+    res.render('edit.ejs', {user: specifiedUser, items: allItems});
+});
+
+// PUT /users/:userId - update users information in DB
+app.put('/users/:userId', async (req, res) => {
+    await User.findByIdAndUpdate(req.params.userId, req.body);
+    res.redirect('/');
+});
+
+// DELETE /users/:userId - remove specified user from DB
+app.delete('/users/:userId', async (req, res) => {
+    await User.findByIdAndDelete(req.params.userId);
+    res.redirect('/');
+});
 
 // turn express server on, listening for HTTPS requests made to port 3000 on the host machine
 app.listen(3000, () => {

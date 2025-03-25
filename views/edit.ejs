@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soft-Res It</title>
+    <title>Edit <%=user.username%></title>
     <link rel="stylesheet" href="/css/style.css">
-    <script defer src="/js/index.js"></script>
+    <script defer src="/js/edit.js"></script>
 </head>
 <body>
-    <h1>Hello!</h1>
-    
-    <button class="new-user">Soft-Reserve or Join</button>
-
-    <form action="/createSR" method="POST" id="softres-form">
+    <form action="/users/<%=user._id%>?_method=PUT" method="POST" id="softres-form">
         <label for="username">Character Name:</label>
-        <input type="text" name="username" id="username" />
+        <input type="text" name="username" id="username" value="<%=user.username%>"/>
         <label for="note">Note:</label>
-        <input type="text" name="note" id="note" />
+        <input type="text" name="note" id="note" value="<%=user.note%>"/>
         <label for="class">Class:</label>
-        <select disabled name="class" id="class">
-            <option hidden selected value=""></option>
+        <select name="class" id="class">
+            <option hidden selected><%=user.class[0].toUpperCase() + user.class.slice(1)%></option>
             <option value="druid">Druid</option>
             <option value="hunter">Hunter</option>
             <option value="mage">Mage</option>
@@ -31,8 +27,8 @@
         </select>
 
         <label for="spec">Specialization:</label>
-        <select disabled name="spec" id="spec">
-            <option hidden selected value=""></option>
+        <select name="spec" id="spec">
+            <option hidden selected><%=user.spec[0].toUpperCase() + user.spec.slice(1)%></option>
             <option class="druid spec" value="restoration">Restoration</option>
             <option class="druid spec" value="bear">Bear</option>
             <option class="druid spec" value="feral">Feral</option>
@@ -69,7 +65,7 @@
         </select>
 
         <label for="softresd">Soft-Reserve: 0 of 2</label>
-        <select disabled name="softresd" id="softresd">
+        <select name="softresd" id="softresd">
             <option hidden selected value=""></option>
             <% for(item of items) { %>
                 <option class="item" value="<%=item._id%>"><%=item.name%></option>
@@ -77,21 +73,5 @@
         </select>
         <button disabled type="submit">Soft-Reserve</button>
     </form>
-    <ul>
-        <% for(item of items) { %>
-            <li><%= item.name %> <%= item.restricted %> <%= item.slot %> <%= item.ilvl %> <%=item.from %> <%= item.softResdBy %></li>
-        <% } %>
-    </ul>
-    <ul>
-        <% for(user of users) { %>
-            <li id="<%=user._id%>"><%=user.username %> <%= user.note %> <%= user.class %> <%= user.spec %> <%=user.softresd %> </li>
-            <form action="/users/<%=user._id%>?_method=DELETE" method="POST">
-                <button type="submit">Delete</button>
-            </form>
-            <form action="/users/<%=user._id%>/edit" method="GET">
-                <button type="submit">Edit</button>
-            </form>
-        <% } %>
-    </ul>
 </body>
 </html>
