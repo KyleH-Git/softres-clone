@@ -32,6 +32,31 @@ header {
     width: 80%;
 }
 
+#new-user {
+    padding: 6px;
+    border-radius: 4px;
+    border: 1px solid  rgb(111, 111, 116);
+    color: white;
+    background-color: rgb(56, 158, 116);
+}
+
+#softres-form-button {
+    padding: 2px;
+    border-radius: 4px;
+    border: 1px solid  rgb(111, 111, 116);
+    color: white;
+    background-color: rgb(56, 158, 116);
+}
+
+#softres-form-button:disabled {
+    padding: 2px;
+    border-radius: 4px;
+    border: 1px solid  rgb(111, 111, 116);
+    color: white;
+    background-color: rgb(50, 75, 64);
+    color:darkgray;
+}
+
 .form-row {
     width: 100%;
     display: flex;
@@ -70,7 +95,6 @@ tr:nth-child(odd){
     align-self: end;
 }
 
-
 .item-table {
     margin: 1em 0 1em 0;
     width: 80%;
@@ -93,10 +117,11 @@ tr:nth-child(odd){
     justify-content: space-evenly;
 }
 
-.delete-btn {
+.delete-btn,
+#cancel-btn{
     background-color: rgb(168, 52, 52);
     color: white;
-    border: 0;
+    border: 1px solid rgb(111, 111, 116);
     border-radius: 4px;
     padding: 4px;
     margin: 2px;
@@ -105,7 +130,7 @@ tr:nth-child(odd){
 .edit-btn {
     background-color: rgb(50, 102, 197);
     color: white;
-    border: 0;
+    border: 1px solid rgb(111, 111, 116);
     border-radius: 4px;
     padding: 4px;
     margin: 2px;
@@ -117,6 +142,11 @@ tr:nth-child(odd){
 
 .from {
     text-align: center;
+}
+
+button:hover:not([disabled]) {
+    cursor: pointer;
+    border: 1px solid white !important;
 }
 
 .hidden {

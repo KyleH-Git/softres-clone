@@ -92,11 +92,18 @@ app.get('/users/:userId/edit', async (req, res) => {
 // PUT /users/:userId - update users information in DB
 app.put('/users/:userId', async (req, res) => {
     let tempItems = [];
+    const specifiedUser = await User.findById(req.params.userId);
     const allItems = await Item.find();
+    for(item of allItems){
+        if(item.softresdby.includes(specifiedUser.username)){
+            await Item.findByIdAndUpdate(item._id, {
+                $pull: {softresdby: specifiedUser.username}
+            })
+        }
+    }
     for(item of allItems){
         if(req.body.softresd.includes(item._id)){
             tempItems.push(item.name);
-            console.log(req.body.username)
             await Item.findByIdAndUpdate(item._id, {
                 $push: { softresdby: req.body.username}
             });
