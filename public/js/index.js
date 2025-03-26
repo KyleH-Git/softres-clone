@@ -6,15 +6,24 @@ const specOptions = document.querySelectorAll('.spec');
 const specializationElement = document.querySelector('#spec');
 const softReserveElement = document.querySelector('#softresd');
 const softReserveFormElement = document.querySelector('#softres-form');
-const softReserveFormBtn = document.querySelector('#softres-form button');
+const softReserveFormBtn = document.querySelector('#softres-form-button');
+const cancelBtn = document.querySelector('#cancel-btn');
+const newReserveBtn = document.querySelector('#new-user');
 const itemElements = document.querySelectorAll('.item');
 const softResLabelElement = document.querySelector('label[for=softresd');
 
 // ***** Event Listeners *****
 
 newUserBtn.addEventListener('click', (event) => {
-    console.log('clicked')
+    newReserveBtn.classList.toggle('hidden');
     softReserveFormElement.classList.toggle('hidden');
+});
+
+cancelBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    newReserveBtn.classList.toggle('hidden');
+    softReserveFormElement.classList.toggle('hidden');
+    
 });
 
 usernameElement.addEventListener('input', (event) => {
@@ -49,8 +58,8 @@ softReserveElement.addEventListener('change', (event) => {
                 softReserveElement.children[0].value = item.value;
             }else{
                 softResLabelElement.innerText = 'Soft-Reserve: 2 of 2';
-                softReserveElement.children[0].innerText = softReserveElement.children[0].innerText + `, ${item.innerText}`;
-                softReserveElement.children[0].value = softReserveElement.children[0].value + ' ' + item.value;
+                softReserveElement.children[0].innerText +=  `, ${item.innerText}`;
+                softReserveElement.children[0].value += ' ' + item.value;
                 softReserveElement.children[0].selected = true;
                 softReserveFormBtn.removeAttribute('disabled');
             }

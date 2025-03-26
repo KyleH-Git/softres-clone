@@ -19,7 +19,7 @@ header {
     grid-row-start: 1;
 }
 
-form {  
+#softres-form {  
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -27,29 +27,98 @@ form {
     grid-column-start: 2;
     grid-row-start: 2;
     align-self: center;
+    border: 1px solid rgb(111, 111, 116);
+    border-radius: 4px;
+    width: 80%;
+}
+
+.form-row {
+    width: 100%;
+    display: flex;
+    margin: 4px;
+    justify-content: space-around;
+}
+
+.form-row.vertical {
+    flex-direction: column;
+    
+    padding: 0 30% 0 30%;
+}
+
+table, th, td{
+    border-collapse: collapse;
+    border: 1px solid rgb(111, 111, 116);
+    padding: 4px;
+}
+
+tr:nth-child(odd){
+    background-color: rgb(77, 77, 82);
+}
+
+.table-info {
+    background-color: rgb(37, 37, 39) !important;
+}
+
+.no-sr {
+    text-align: center;
 }
 
 .new-user {
     margin: 0.5em;
     grid-column-start: 2;
-    grid-row-start: 1;
+    grid-row-start: 2;
     align-self: end;
 }
 
+
 .item-table {
-    margin: 1em;
+    margin: 1em 0 1em 0;
+    width: 80%;
     grid-column-start: 2;
     grid-row-start: 4;
     align-self: start;
 }
 
 .user-table {
-    margin: 1em;
+    margin: 1em 0 1em 0;
+    width: 80%;
     grid-column-start: 2;
     grid-row-start: 3;
     align-self: start;
 }
 
+.function {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.delete-btn {
+    background-color: rgb(168, 52, 52);
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 2px;
+}
+
+.edit-btn {
+    background-color: rgb(50, 102, 197);
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 2px;
+}
+
+.ilvl {
+    text-align: center;
+}
+
+.from {
+    text-align: center;
+}
+
 .hidden {
-    display: none;
+    display: none !important;
 }

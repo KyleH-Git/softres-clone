@@ -52,15 +52,9 @@ const Item = require('./models/item.js');
 app.get('/', async (req, res) => {
     const allUsers = await User.find();
     const allItems = await Item.find();
-    // for(foundUser of allUsers){
-    //     item1 = foundUser.softresd.substring(0, foundUser.softresd.indexOf(' '));
-    //     item2 = foundUser.softresd.substring(foundUser.softresd.indexOf(' ') + 1);
-    //     foundUser.softresd = '';
-    //     for(foundItem of allItems){
-    //         if(item1 == foundItem._id || item2 == foundItem._id)
-    //             foundUser.softresd += foundItem.name + ' ';
-    //     }
-    // }
+    for(specUser of allUsers){
+        specUser.class = specUser.class.charAt(0).toUpperCase() + specUser.class.slice(1);
+    }
     res.render('index.ejs', {users: allUsers, items: allItems});
 });
 
@@ -71,30 +65,15 @@ app.get('/user/:userId', async (req, res) => {
 });
 
 // POST /users/newSR - store the data from the req obj in the DB and redirect user to homepage
-// app.post('/createSR', async (req,res) => {
-//     let tempItems = [];
-//     const allItems = await Item.find();
-//     for(item of allItems){
-//         if(req.body.softresd.includes(item._id)){
-//             tempItems.push(item.name);
-//             console.log(req.body.username)
-//             await Item.findByIdAndUpdate(item._id, {softresdby: {req.body.username}});
-//         }
-//     }
-//     req.body.softresd = tempItems;
-//     await User.create(req.body);
-//     res.redirect('/');
-// });
-
-app.post('/createSR', async (req, res) => {
+app.post('/createSR', async (req,res) => {
     let tempItems = [];
     const allItems = await Item.find();
-    for (let item of allItems) {
-        if (req.body.softresd.includes(item._id)) {
+    for(item of allItems){
+        if(req.body.softresd.includes(item._id)){
             tempItems.push(item.name);
-            console.log(req.body.username);
+            console.log(req.body.username)
             await Item.findByIdAndUpdate(item._id, {
-                $push: { softresdby: req.body.username }
+                $push: { softresdby: req.body.username}
             });
         }
     }
@@ -118,7 +97,16 @@ app.put('/users/:userId', async (req, res) => {
 
 // DELETE /users/:userId - remove specified user from DB
 app.delete('/users/:userId', async (req, res) => {
-    await User.findByIdAndDelete(req.params.userId);
+    const specifiedUser = await User.findById(req.params.userId);
+    const allItems = await Item.find();
+    for(item of allItems){
+        if(item.softresdby.includes(specifiedUser.username)){
+            await Item.findByIdAndUpdate(item._id, {
+                $pull: {softresdby: specifiedUser.username}
+            })
+        }
+    }
+    await User.deleteOne({_id: specifiedUser._id});
     res.redirect('/');
 });
 
