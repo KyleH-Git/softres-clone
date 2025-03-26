@@ -21,6 +21,28 @@ newUserBtn.addEventListener('click', (event) => {
 
 cancelBtn.addEventListener('click', (event) => {
     event.preventDefault();
+    classElement.setAttribute('disabled', "");
+    specializationElement.setAttribute('disabled', "");
+    softReserveElement.setAttribute('disabled', "");
+    softReserveFormBtn.setAttribute('disabled', "");
+    softReserveElement.children[0].setAttribute('hidden', "");
+    softReserveElement.children[0].value = '';
+    softReserveElement.children[0].innerText = '';
+    softResLabelElement.innerText = 'Soft-Reserve: 0 of 2';
+    const inputs = document.getElementsByTagName('input');
+    const selects = document.getElementsByTagName('select');
+    for(input of inputs){
+        input.value = '';
+    }
+    for(select of selects){
+        select.value = '';
+    }
+    for(spec of specOptions){
+        spec.setAttribute('hidden', "");
+    }
+    for(item of itemElements){
+        item.removeAttribute('hidden', "")
+    }
     newReserveBtn.classList.toggle('hidden');
     softReserveFormElement.classList.toggle('hidden');
     
@@ -48,8 +70,6 @@ specializationElement.addEventListener('change', (event) => {
 softReserveElement.addEventListener('change', (event) => {
     softReserveElement.classList.add(`${softReserveElement.value}`)
     for(item of itemElements){
-        console.log(item.value)
-        console.log(softReserveElement.value + 'softresele')
         if(item.value === softReserveElement.value){
             if(softReserveElement.children[0].hasAttribute('hidden')){
                 softResLabelElement.innerText = 'Soft-Reserve: 1 of 2';

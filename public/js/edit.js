@@ -4,7 +4,8 @@ const classElement = document.querySelector('#class');
 const specOptions = document.querySelectorAll('.spec');
 const specializationElement = document.querySelector('#spec');
 const softReserveElement = document.querySelector('#softresd');
-const softReserveFormBtn = document.querySelector('#softres-form button');
+const softReserveFormBtn = document.querySelector('#softres-form-button');
+const cancelBtn = document.querySelector('#cancel-btn');
 const itemElements = document.querySelectorAll('.item');
 const softResLabelElement = document.querySelector('label[for=softresd');
 
@@ -19,6 +20,11 @@ classElement.addEventListener('change', (event) => {
         spec.removeAttribute('hidden');
     }
     specializationElement.value = '';
+});
+
+cancelBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    location.href = '/';
 });
 
 window.addEventListener('load', (event) => {

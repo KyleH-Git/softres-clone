@@ -10,69 +10,88 @@
 <body>
     <%- include('partials/header.ejs') %>
     <form action="/users/<%=user._id%>?_method=PUT" method="POST" id="softres-form">
-        <label for="username">Character Name:</label>
-        <input type="text" name="username" id="username" value="<%=user.username%>"/>
-        <label for="note">Note:</label>
-        <input type="text" name="note" id="note" value="<%=user.note%>"/>
-        <label for="class">Class:</label>
-        <select name="class" id="class">
-            <option hidden selected><%=user.class[0].toUpperCase() + user.class.slice(1)%></option>
-            <option value="druid">Druid</option>
-            <option value="hunter">Hunter</option>
-            <option value="mage">Mage</option>
-            <option value="paladin">Paladin</option>
-            <option value="priest">Priest</option>
-            <option value="rogue">Rogue</option>
-            <option value="warlock">Warlock</option>
-            <option value="warrior">Warrior</option>
-        </select>
+        <h2>Soft-reserve</h2>
+        <div class="form-row">
+            <div>
+                <label for="username">Character Name:</label><br>
+                <input type="text" name="username" id="username" value="<%=user.username%>"/>
+            </div>
+            <div>
+                <label for="note">Note:</label><br>
+                <input type="text" name="note" id="note" value="<%=user.note%>"/>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div>
+                <label for="class">Class:</label><br>
+                <select name="class" id="class">
+                    <option hidden selected><%=user.class[0].toUpperCase() + user.class.slice(1)%></option>
+                    <option value="druid">Druid</option>
+                    <option value="hunter">Hunter</option>
+                    <option value="mage">Mage</option>
+                    <option value="paladin">Paladin</option>
+                    <option value="priest">Priest</option>
+                    <option value="rogue">Rogue</option>
+                    <option value="warlock">Warlock</option>
+                    <option value="warrior">Warrior</option>
+                </select>
+            </div>
+            <div>
+                <label for="spec">Specialization:</label><br>
+                <select name="spec" id="spec">
+                    <option hidden selected><%=user.spec[0].toUpperCase() + user.spec.slice(1)%></option>
+                    <option class="druid spec" value="restoration">Restoration</option>
+                    <option class="druid spec" value="bear">Bear</option>
+                    <option class="druid spec" value="feral">Feral</option>
+                    <option class="druid spec" value="balance">Balance</option>
 
-        <label for="spec">Specialization:</label>
-        <select name="spec" id="spec">
-            <option hidden selected><%=user.spec[0].toUpperCase() + user.spec.slice(1)%></option>
-            <option class="druid spec" value="restoration">Restoration</option>
-            <option class="druid spec" value="bear">Bear</option>
-            <option class="druid spec" value="feral">Feral</option>
-            <option class="druid spec" value="balance">Balance</option>
+                    <option class="hunter spec" value="marksmanship">Marksmanship</option>
+                    <option class="hunter spec" value="beastmastery">Beast Mastery</option>
+                    <option class="hunter spec" value="survival">Survival</option>
+                    
+                    <option class="mage spec" value="frost">Frost</option>
+                    <option class="mage spec" value="fire">Fire</option>
+                    <option class="mage spec" value="arcane">Arcane</option>
 
-            <option class="hunter spec" value="marksmanship">Marksmanship</option>
-            <option class="hunter spec" value="beastmastery">Beast Mastery</option>
-            <option class="hunter spec" value="survival">Survival</option>
-            
-            <option class="mage spec" value="frost">Frost</option>
-            <option class="mage spec" value="fire">Fire</option>
-            <option class="mage spec" value="arcane">Arcane</option>
+                    <option class="paladin spec" value="protectionpala">Protection</option>
+                    <option class="paladin spec" value="retribution">Retribution</option>
+                    <option class="paladin spec" value="holypala">Holy</option>
 
-            <option class="paladin spec" value="protectionpala">Protection</option>
-            <option class="paladin spec" value="retribution">Retribution</option>
-            <option class="paladin spec" value="holypala">Holy</option>
+                    <option class="priest spec" value="holy">Holy</option>
+                    <option class="priest spec" value="discipline">Discipline</option>
+                    <option class="priest spec" value="shadow">Shadow</option>
 
-            <option class="priest spec" value="holy">Holy</option>
-            <option class="priest spec" value="discipline">Discipline</option>
-            <option class="priest spec" value="shadow">Shadow</option>
+                    <option class="rogue spec" value="swords">Swords</option>
+                    <option class="rogue spec" value="daggers">Daggers</option>
+                    <option class="rogue spec" value="maces">Maces</option>
 
-            <option class="rogue spec" value="swords">Swords</option>
-            <option class="rogue spec" value="daggers">Daggers</option>
-            <option class="rogue spec" value="maces">Maces</option>
+                    <option class="warlock spec" value="affliction">Affliction</option>
+                    <option class="warlock spec" value="demonology">Demonology</option>
+                    <option class="warlock spec" value="destruction">Destruction</option>
 
-            <option class="warlock spec" value="affliction">Affliction</option>
-            <option class="warlock spec" value="demonology">Demonology</option>
-            <option class="warlock spec" value="destruction">Destruction</option>
+                    <option class="warrior spec" value="fury">Fury</option>
+                    <option class="warrior spec" value="protection">Protection</option>
+                    <option class="warrior spec" value="arms">Arms</option>
 
-            <option class="warrior spec" value="fury">Fury</option>
-            <option class="warrior spec" value="protection">Protection</option>
-            <option class="warrior spec" value="arms">Arms</option>
-
-        </select>
-
-        <label for="softresd">Soft-Reserve: 0 of 2</label>
-        <select name="softresd" id="softresd">
-            <option hidden selected value=""></option>
-            <% for(item of items) { %>
-                <option class="item" value="<%=item._id%>"><%=item.name%></option>
-            <% } %>
-        </select>
-        <button disabled type="submit">Soft-Reserve</button>
+                </select>
+            </div>
+        </div>
+        <div class="form-row vertical" >
+          
+            <label for="softresd">Soft-Reserve: 0 of 2</label>
+            <select name="softresd" id="softresd">
+                <option hidden selected value=""></option>
+                <% for(item of items) { %>
+                    <option class="item" value="<%=item._id%>"><%=item.name%></option>
+                <% } %>
+            </select>
+    
+        </div>
+        <div class="form-row">
+            <button id="cancel-btn">Cancel</button>
+            <button disabled type="submit" id="softres-form-button">Edit</button>
+        </div>
     </form>
 </body>
 </html>
