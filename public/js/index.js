@@ -1,5 +1,11 @@
 // ***** Query Selectors ***** 
 const newUserBtn = document.querySelector('#new-user');
+const accountDivElement = document.querySelector('#account-div');
+const signUpBtn = document.querySelector('#sign-up');
+const signInBtn = document.querySelector('#sign-in');
+const cancelAccBtns = document.querySelectorAll('.cancel-acc-btn')
+const signUpFormElement = document.querySelector('#signUp-form');
+const signInFormElement = document.querySelector('#signIn-form');
 const usernameElement = document.querySelector('#username');
 const classElement = document.querySelector('#class');
 const specOptions = document.querySelectorAll('.spec');
@@ -14,7 +20,26 @@ const softResLabelElement = document.querySelector('label[for=softresd');
 
 // ***** Event Listeners *****
 
+signUpBtn.addEventListener('click', (event) => {
+    accountDivElement.classList.toggle('hidden');
+    signUpFormElement.classList.toggle('hidden');
+});
+
+signInBtn.addEventListener('click', (event) => {
+    accountDivElement.classList.toggle('hidden');
+    signInFormElement.classList.toggle('hidden');
+});
+
+for(btn of cancelAccBtns){
+    btn.addEventListener('click', (event) => {
+        event.preventDefault();
+        accountDivElement.classList.toggle('hidden');
+        event.currentTarget.parentElement.classList.toggle('hidden');
+    });
+}
+
 newUserBtn.addEventListener('click', (event) => {
+    console.log('clicked')
     newReserveBtn.classList.toggle('hidden');
     softReserveFormElement.classList.toggle('hidden');
 });

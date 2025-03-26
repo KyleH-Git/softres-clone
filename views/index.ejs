@@ -9,9 +9,40 @@
 </head>
 <body>
     <%- include('partials/header.ejs') %>
-    
-    <button class="new-user" id="new-user">Soft-Reserve or Join</button>
+    <form action="/auth/sign-out" method="GET">
+        <button class ='logout-btn' type="submit">Log Out</button>
+    </form>
+   
+    <%console.log(loggedIn !== undefined)%>
+      
+    <button class="<%= loggedIn === undefined ? 'hidden' : 'new-user'%>" id="new-user">Soft-Reserve or Join</button>
 
+    
+    <div id="account-div" class="<%= loggedIn === undefined ? '' : 'hidden' %>">
+        <button class="sign-up" id="sign-up">Sign-Up</button>
+        <span> or </span>
+        <button class="sign-in" id="sign-in">Sign-In</button>
+    </div>
+    
+    <form class="hidden account-form" id="signIn-form" action="/auth/sign-in" method="POST" >
+        <label for="accountName">Account Name:</label>
+        <input type="text" name="accountName" id="accountName" />
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" />
+        <button type="submit">Sign in</button> 
+        <button class="cancel-acc-btn">Cancel</button>
+    </form>
+
+    <form class="hidden account-form" id="signUp-form" action="/auth/sign-up" method="POST">
+        <label for="accountName">Account Name:</label>
+        <input type="text" name="accountName" id="accountName" />
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" />
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" />
+        <button type="submit">Sign up</button>
+        <button class="cancel-acc-btn">Cancel</button>
+    </form>
     <form action="/createSR" method="POST" id="softres-form" class="hidden">
         <h2>Soft-reserve</h2>
         <div class="form-row">
