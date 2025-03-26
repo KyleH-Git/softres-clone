@@ -8,7 +8,10 @@ const itemSchema = new mongoose.Schema({
     slot: String,
     ilvl: Number,
     from: String,
-    softResdBy: String,
+    softresdby: [{
+        type: String,
+        default: undefined
+    }]
 });
 
 //create a a new collection in the DB, store it to a js object for export

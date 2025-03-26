@@ -8,9 +8,9 @@
     <script defer src="/js/index.js"></script>
 </head>
 <body>
-    <h1>Hello!</h1>
+    <%- include('partials/header.ejs') %>
     
-    <button class="new-user">Soft-Reserve or Join</button>
+    <button class="new-user" id="new-user">Soft-Reserve or Join</button>
 
     <form action="/createSR" method="POST" id="softres-form">
         <label for="username">Character Name:</label>
@@ -77,21 +77,57 @@
         </select>
         <button disabled type="submit">Soft-Reserve</button>
     </form>
-    <ul>
-        <% for(item of items) { %>
-            <li><%= item.name %> <%= item.restricted %> <%= item.slot %> <%= item.ilvl %> <%=item.from %> <%= item.softResdBy %></li>
-        <% } %>
-    </ul>
-    <ul>
-        <% for(user of users) { %>
-            <li id="<%=user._id%>"><%=user.username %> <%= user.note %> <%= user.class %> <%= user.spec %> <%=user.softresd %> </li>
-            <form action="/users/<%=user._id%>?_method=DELETE" method="POST">
-                <button type="submit">Delete</button>
-            </form>
-            <form action="/users/<%=user._id%>/edit" method="GET">
-                <button type="submit">Edit</button>
-            </form>
-        <% } %>
-    </ul>
+    <table class="user-table">
+        <thead>
+            <tr class="table-info">
+                <th>Username</th>
+                <th>Class</th>
+                <th>Items</th>
+                <th>Functions</th>
+            </tr>
+        </thead>
+        <tbody class="rows">
+            <% for(user of users) { %>
+                <tr id="<%=user._id%>">
+                    <td><%=user.username %></td>
+                    <td><%=user.class%></td>
+                    <td><%=user.softresd[0]%><br><%=user.softresd[1]%></td>
+                    <td>
+                        <form action="/users/<%=user._id%>?_method=DELETE" method="POST">
+                            <button type="submit">Delete</button>
+                        </form>
+                        <form action="/users/<%=user._id%>/edit" method="GET">
+                            <button type="submit">Edit</button>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <table class="item-table">
+        <thead>
+            <tr class="table-info">
+                <th>Name</th>
+                <th>Slot</th>
+                <th>ilvl</th>                  
+                <th>From</th>
+                <th>Soft-reservers</th>
+                </tr>
+        </thead>
+        <tbody class="rows">
+            <% for(item of items) { %>
+                <tr id="<%=item._id%>">
+                    <td><%=item.name%></td>
+                    <td><%=item.slot%></td>
+                    <td><%=item.ilvl%></td>
+                    <td><%=item.from%></td>
+                    <% for(user of item.softresdby) {%>
+                    <td><%=user%></td>
+                    <% } %>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
 </body>
 </html>

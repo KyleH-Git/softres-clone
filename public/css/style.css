@@ -7,4 +7,49 @@
 body {
     background-color: rgb(56, 56, 61);
     color: rgb(255, 253, 250);
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 0.5fr;
+    grid-template-rows: 0.25fr auto-fill 1fr 1fr 0.25fr;
+    justify-items: center;
+}
+
+header {
+    margin: 1em;
+    grid-column-start: 2;
+    grid-row-start: 1;
+}
+
+form {  
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2em;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    align-self: center;
+}
+
+.new-user {
+    margin: 0.5em;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    align-self: end;
+}
+
+.item-table {
+    margin: 1em;
+    grid-column-start: 2;
+    grid-row-start: 4;
+    align-self: start;
+}
+
+.user-table {
+    margin: 1em;
+    grid-column-start: 2;
+    grid-row-start: 3;
+    align-self: start;
+}
+
+.hidden {
+    display: none;
 }

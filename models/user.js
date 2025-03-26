@@ -7,7 +7,10 @@ const userSchema = new mongoose.Schema({
     note: String,
     class: String,
     spec: String,
-    softresd: String,
+    softresd: [{
+        type: String,
+        default: undefined
+    }]
 });
 
 //create a a new collection in the DB, store it to a js object for export
