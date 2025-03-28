@@ -1,6 +1,7 @@
 // ***** Query Selectors ***** 
 const newUserBtn = document.querySelector('#new-user');
 const accountDivElement = document.querySelector('#account-div');
+const userDivElement = document.querySelector('#user-div');
 const signUpBtn = document.querySelector('#sign-up');
 const signInBtn = document.querySelector('#sign-in');
 const cancelAccBtns = document.querySelectorAll('.cancel-acc-btn')
@@ -40,7 +41,7 @@ for(btn of cancelAccBtns){
 
 newUserBtn.addEventListener('click', (event) => {
     console.log('clicked')
-    newReserveBtn.classList.toggle('hidden');
+    userDivElement.classList.toggle('hidden');
     softReserveFormElement.classList.toggle('hidden');
 });
 
@@ -68,7 +69,7 @@ cancelBtn.addEventListener('click', (event) => {
     for(item of itemElements){
         item.removeAttribute('hidden', "")
     }
-    newReserveBtn.classList.toggle('hidden');
+    userDivElement.classList.toggle('hidden');
     softReserveFormElement.classList.toggle('hidden');
     
 });

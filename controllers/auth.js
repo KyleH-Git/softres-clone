@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 router.post('/sign-in', async(req, res) => {
     const accountExists = await Account.findOne({ accountName: req.body.accountName})
     if(!accountExists) {
-        return res.render('/',);
+        return res.redirect('/');
     }
 
     console.log(accountExists)
@@ -14,13 +14,16 @@ router.post('/sign-in', async(req, res) => {
         req.body.password,
         accountExists.password
     );
+    console.log('afer pass check')
     if(!validPassword){
-        return res.render('/');
+        return res.redirect('/');
     }
+
+   
 
     req.session.user = {
         username: accountExists.accountName,
-        _id: accountExists._id
+        _id: accountExists._id,
     }
     
     // console.log(req.session.user)
@@ -29,23 +32,30 @@ router.post('/sign-in', async(req, res) => {
 
 router.post('/sign-up', async (req, res) => {
     const accountExists = await Account.findOne({ accountName: req.body.accountName});
+    console.log(accountExists)
     if(accountExists){
-        res.render('/');
-    }
-    if(req.body.password !== req.body.confirmPassword){
-        res.render('/');
+        return res.redirect('/');
     }
 
+    console.log('passwordcheck')
+    if(req.body.password !== req.body.confirmPassword){
+        return res.redirect('/');
+    }
+
+    console.log('hasing password')
     const hashedPassword = bcrypt.hashSync(req.body.password, 10);
     req.body.password = hashedPassword;
 
     const account = await Account.create(req.body);
 
+    console.log('made user')
+    
+    
     req.session.user = {
         username: account.accountName,
         _id: account._id,
     }
-
+    console.log('saved sessionid')
     res.redirect('/');
 });
 

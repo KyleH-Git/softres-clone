@@ -12,9 +12,8 @@ const index = async (req, res) => {
     for(specUser of allUsers){
         specUser.class = specUser.class.charAt(0).toUpperCase() + specUser.class.slice(1);
     }
-    const banana = req.session.user;
-    console.log(banana);
-    res.render('index.ejs', {users: allUsers, items: allItems, loggedIn: banana, banana: 'banana'});
+
+    res.render('index.ejs', {users: allUsers, items: allItems, accountInfo: req.session.user});
 };
 
 // show /users/:userId - display the specified users information
@@ -37,6 +36,10 @@ const create = async (req,res) => {
         }
     }
     req.body.softresd = tempItems;
+    req.body.accountId = req.body.accountId.trim();
+    await console.log('here');
+    await console.log(req.body.accountId);
+    
     await User.create(req.body);
     res.redirect('/');
 };

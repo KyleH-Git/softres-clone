@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     note: String,
     class: String,
     spec: String,
+    accountId: String,
     softresd: [{
         type: String,
         default: undefined

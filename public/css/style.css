@@ -50,8 +50,9 @@ header {
 
 .account-form {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-top: 2em;
+    padding: 10px;
     grid-column-start: 2;
     grid-row-start: 2;
     align-self: center;
@@ -59,6 +60,12 @@ header {
     border-radius: 4px;
     width: 80%;
 }
+
+.account-form > label{
+    padding: 4px;
+}
+
+
 
 #softres-form-button {
     padding: 2px;
@@ -108,7 +115,11 @@ tr:nth-child(odd){
     text-align: center;
 }
 
-.new-user {
+.user-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     margin: 0.5em;
     grid-column-start: 2;
     grid-row-start: 2;
@@ -138,8 +149,35 @@ tr:nth-child(odd){
 }
 
 .delete-btn,
-#cancel-btn{
+#cancel-btn, .cancel-acc-btn{
     background-color: rgb(168, 52, 52);
+    color: white;
+    border: 1px solid rgb(111, 111, 116);
+    border-radius: 4px;
+    padding: 4px;
+    margin: 2px;
+}
+
+.sign-up-btn{
+    background-color: rgb(11, 65, 167);
+    color: white;
+    border: 1px solid rgb(111, 111, 116);
+    border-radius: 4px;
+    padding: 4px;
+    margin: 2px;
+}
+
+.sign-in-btn {
+    background-color: rgb(83, 126, 206);
+    color: white;
+    border: 1px solid rgb(111, 111, 116);
+    border-radius: 4px;
+    padding: 4px;
+    margin: 2px;
+}
+
+.logout-btn {
+    background-color: rgb(79, 94, 121);
     color: white;
     border: 1px solid rgb(111, 111, 116);
     border-radius: 4px;
