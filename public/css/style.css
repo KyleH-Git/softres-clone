@@ -1,212 +1,28 @@
-* {
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-    margin: 0;
+.table-hover tbody tr:hover {
+    background-color: #e2e6ea !important;
 }
 
-body {
-    background-color: rgb(56, 56, 61);
-    color: rgb(255, 253, 250);
-    display: grid;
-    grid-template-columns: 0.5fr 2fr 0.5fr;
-    grid-template-rows: 0.25fr auto-fill 1fr 1fr 0.25fr;
-    justify-items: center;
+.softres-0 {
+    background-color: #f8f9fa;
 }
 
-header {
-    margin: 1em;
-    grid-column-start: 2;
-    grid-row-start: 1;
+.softres-1 {
+    background-color: #d4edda;
 }
 
-#softres-form {  
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 2em;
-    grid-column-start: 2;
-    grid-row-start: 2;
-    align-self: center;
-    border: 1px solid rgb(111, 111, 116);
-    border-radius: 4px;
-    width: 80%;
+.softres-2 {
+    background-color: #ffeeba;
 }
 
-#account-div {
-    display: flex;
-    align-items: center;
-    margin-top: 2em;
-    grid-column-start: 2;
-    grid-row-start: 2;
+.softres-3 {
+    background-color: #f8d7da;
 }
 
-#new-user {
-    padding: 6px;
-    border-radius: 4px;
-    border: 1px solid  rgb(111, 111, 116);
-    color: white;
-    background-color: rgb(56, 158, 116);
+.softres-4{
+    background-color: #f5c6cb;
 }
 
-.account-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    grid-column-start: 2;
-    grid-row-start: 2;
-    align-self: center;
-    border: 1px solid rgb(111, 111, 116);
-    border-radius: 4px;
-    width: 80%;
-}
-
-.account-form > label{
-    padding: 4px;
-}
-
-
-
-#softres-form-button {
-    padding: 2px;
-    border-radius: 4px;
-    border: 1px solid  rgb(111, 111, 116);
-    color: white;
-    background-color: rgb(56, 158, 116);
-}
-
-#softres-form-button:disabled {
-    padding: 2px;
-    border-radius: 4px;
-    border: 1px solid  rgb(111, 111, 116);
-    color: white;
-    background-color: rgb(50, 75, 64);
-    color:darkgray;
-}
-
-.form-row {
-    width: 100%;
-    display: flex;
-    margin: 4px;
-    justify-content: space-around;
-}
-
-.form-row.vertical {
-    flex-direction: column;
-    
-    padding: 0 30% 0 30%;
-}
-
-table, th, td{
-    border-collapse: collapse;
-    border: 1px solid rgb(111, 111, 116);
-    padding: 4px;
-}
-
-tr:nth-child(odd){
-    background-color: rgb(77, 77, 82);
-}
-
-.table-info {
-    background-color: rgb(37, 37, 39) !important;
-}
-
-.no-sr {
-    text-align: center;
-}
-
-.user-div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0.5em;
-    grid-column-start: 2;
-    grid-row-start: 2;
-    align-self: end;
-}
-
-.item-table {
-    margin: 1em 0 1em 0;
-    width: 80%;
-    grid-column-start: 2;
-    grid-row-start: 4;
-    align-self: start;
-}
-
-.user-table {
-    margin: 1em 0 1em 0;
-    width: 80%;
-    grid-column-start: 2;
-    grid-row-start: 3;
-    align-self: start;
-}
-
-.function {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.delete-btn,
-#cancel-btn, .cancel-acc-btn{
-    background-color: rgb(168, 52, 52);
-    color: white;
-    border: 1px solid rgb(111, 111, 116);
-    border-radius: 4px;
-    padding: 4px;
-    margin: 2px;
-}
-
-.sign-up-btn{
-    background-color: rgb(11, 65, 167);
-    color: white;
-    border: 1px solid rgb(111, 111, 116);
-    border-radius: 4px;
-    padding: 4px;
-    margin: 2px;
-}
-
-.sign-in-btn {
-    background-color: rgb(83, 126, 206);
-    color: white;
-    border: 1px solid rgb(111, 111, 116);
-    border-radius: 4px;
-    padding: 4px;
-    margin: 2px;
-}
-
-.logout-btn {
-    background-color: rgb(79, 94, 121);
-    color: white;
-    border: 1px solid rgb(111, 111, 116);
-    border-radius: 4px;
-    padding: 4px;
-    margin: 2px;
-}
-
-.edit-btn {
-    background-color: rgb(50, 102, 197);
-    color: white;
-    border: 1px solid rgb(111, 111, 116);
-    border-radius: 4px;
-    padding: 4px;
-    margin: 2px;
-}
-
-.ilvl {
-    text-align: center;
-}
-
-.from {
-    text-align: center;
-}
-
-button:hover:not([disabled]) {
-    cursor: pointer;
-    border: 1px solid white !important;
-}
-
-.hidden {
-    display: none !important;
+.content-wrapper {
+    margin-left: 25%;
+    margin-right: 25%;
 }

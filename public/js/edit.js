@@ -12,55 +12,63 @@ const softResLabelElement = document.querySelector('label[for=softresd');
 // ***** Event Listeners *****
 
 
+// Handle change event for classElement
 classElement.addEventListener('change', (event) => {
-    for(spec of specOptions){
-        spec.setAttribute('hidden', "");
-    }
-    for(spec of document.querySelectorAll(`.${classElement.value}`)){
-        spec.removeAttribute('hidden');
-    }
+    // Hide all spec options
+    specOptions.forEach(spec => spec.classList.add('d-none'));
+
+    // Show only the selected spec options
+    document.querySelectorAll(`.${classElement.value}`).forEach(spec => {
+        spec.classList.remove('d-none');
+    });
+
+    // Clear specialization value
     specializationElement.value = '';
 });
 
+// Handle cancel button click event
 cancelBtn.addEventListener('click', (event) => {
     event.preventDefault();
     location.href = '/';
 });
 
+// Handle window load event
 window.addEventListener('load', (event) => {
-    for(spec of specOptions){
-        spec.setAttribute('hidden', "");
-    }
-    console.log(classElement.value)
-    for(spec of document.querySelectorAll(`.${classElement.value.toLowerCase()}`)){
-        spec.removeAttribute('hidden');
-    }
+    // Hide all spec options initially
+    specOptions.forEach(spec => spec.classList.add('d-none'));
+
+    // Show the selected spec options based on the classElement value
+    document.querySelectorAll(`.${classElement.value.toLowerCase()}`).forEach(spec => {
+        spec.classList.remove('d-none');
+    });
+
+    console.log(classElement.value);
 });
 
+// Handle change event for softReserveElement
 softReserveElement.addEventListener('change', (event) => {
-    softReserveElement.classList.add(`${softReserveElement.value}`)
-    for(item of itemElements){
-        console.log(item.value)
-        console.log(softReserveElement.value + 'softresele')
-        if(item.value === softReserveElement.value){
 
-            if(softReserveElement.children[0].hasAttribute('hidden')){
+    softReserveElement.classList.add(`${softReserveElement.value}`);
+
+    itemElements.forEach(item => {
+        if (item.value === softReserveElement.value) {
+            if (softReserveElement.children[0].classList.contains('d-none')) {
                 softResLabelElement.innerText = 'Soft-Reserve: 1 of 2';
-                softReserveElement.children[0].removeAttribute('hidden');
+                softReserveElement.children[0].classList.remove('d-none');
                 softReserveElement.children[0].innerText = item.innerText;
                 softReserveElement.children[0].value = item.value;
-            }else{
+            } else {
                 softResLabelElement.innerText = 'Soft-Reserve: 2 of 2';
-                softReserveElement.children[0].innerText = softReserveElement.children[0].innerText + `, ${item.innerText}`;
-                softReserveElement.children[0].value = softReserveElement.children[0].value + ' ' + item.value;
+                softReserveElement.children[0].innerText += `, ${item.innerText}`;
+                softReserveElement.children[0].value += ' ' + item.value;
                 softReserveElement.children[0].selected = true;
                 softReserveFormBtn.removeAttribute('disabled');
             }
         }
-    }
-    if(softReserveElement.classList.length === 2){
-        for(item of itemElements){
-            item.setAttribute('hidden', "")
-        }
+    });
+
+    // If there are two selected items, hide the remaining options
+    if (softReserveElement.classList.length === 2) {
+        itemElements.forEach(item => item.classList.add('d-none'));
     }
 });

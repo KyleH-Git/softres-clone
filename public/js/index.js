@@ -21,85 +21,105 @@ const softResLabelElement = document.querySelector('label[for=softresd');
 
 // ***** Event Listeners *****
 
+// Event listener for signUpBtn
 signUpBtn.addEventListener('click', (event) => {
-    accountDivElement.classList.toggle('hidden');
-    signUpFormElement.classList.toggle('hidden');
+    accountDivElement.classList.toggle('d-none');
+    signUpFormElement.classList.toggle('d-none');
 });
 
+// Event listener for signInBtn
 signInBtn.addEventListener('click', (event) => {
-    accountDivElement.classList.toggle('hidden');
-    signInFormElement.classList.toggle('hidden');
+    accountDivElement.classList.toggle('d-none');
+    signInFormElement.classList.toggle('d-none');
 });
 
-for(btn of cancelAccBtns){
+// Event listeners for cancel buttons
+for (btn of cancelAccBtns) {
     btn.addEventListener('click', (event) => {
         event.preventDefault();
-        accountDivElement.classList.toggle('hidden');
-        event.currentTarget.parentElement.classList.toggle('hidden');
+        accountDivElement.classList.toggle('d-none');
+        event.currentTarget.parentElement.parentElement.parentElement.classList.toggle('d-none');
     });
 }
 
+// Event listener for newUserBtn
 newUserBtn.addEventListener('click', (event) => {
-    console.log('clicked')
-    userDivElement.classList.toggle('hidden');
-    softReserveFormElement.classList.toggle('hidden');
+    console.log('clicked');
+    userDivElement.classList.toggle('d-none');
+    softReserveFormElement.classList.toggle('d-none');
 });
 
+// Event listener for cancelBtn
 cancelBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    classElement.setAttribute('disabled', "");
-    specializationElement.setAttribute('disabled', "");
-    softReserveElement.setAttribute('disabled', "");
-    softReserveFormBtn.setAttribute('disabled', "");
-    softReserveElement.children[0].setAttribute('hidden', "");
+
+    // Disable form elements and reset values
+    classElement.setAttribute('disabled', '');
+    specializationElement.setAttribute('disabled', '');
+    softReserveElement.setAttribute('disabled', '');
+    softReserveFormBtn.setAttribute('disabled', '');
+    
+    // Hide selected option
+    softReserveElement.children[0].classList.add('d-none');
     softReserveElement.children[0].value = '';
     softReserveElement.children[0].innerText = '';
     softResLabelElement.innerText = 'Soft-Reserve: 0 of 2';
+    
+    // Reset input and select elements
     const inputs = document.getElementsByTagName('input');
     const selects = document.getElementsByTagName('select');
-    for(input of inputs){
+    for (input of inputs) {
         input.value = '';
     }
-    for(select of selects){
+    for (select of selects) {
         select.value = '';
     }
-    for(spec of specOptions){
-        spec.setAttribute('hidden', "");
+
+    // Hide spec options
+    for (spec of specOptions) {
+        spec.classList.add('d-none');
     }
-    for(item of itemElements){
-        item.removeAttribute('hidden', "")
+    for (item of itemElements) {
+        item.classList.remove('d-none');
     }
-    userDivElement.classList.toggle('hidden');
-    softReserveFormElement.classList.toggle('hidden');
-    
+
+    // Toggle visibility of the userDiv and softReserveForm
+    userDivElement.classList.toggle('d-none');
+    softReserveFormElement.classList.toggle('d-none');
 });
 
+// Event listener for usernameElement input
 usernameElement.addEventListener('input', (event) => {
     classElement.removeAttribute('disabled');
 });
 
+// Event listener for classElement change
 classElement.addEventListener('change', (event) => {
     console.log(classElement.value);
+
+    // Enable specializationElement and reset d-none class for spec options
     specializationElement.removeAttribute('disabled');
-    for(spec of specOptions){
-        spec.setAttribute('hidden', "");
+    for (spec of specOptions) {
+        spec.classList.add('d-none');
     }
-    for(spec of document.querySelectorAll(`.${classElement.value}`)){
-        spec.removeAttribute('hidden');
+    for (spec of document.querySelectorAll(`.${classElement.value}`)) {
+        spec.classList.remove('d-none');
     }
 });
 
+// Event listener for specializationElement change
 specializationElement.addEventListener('change', (event) => {
     softReserveElement.removeAttribute('disabled');
 });
+
 
 softReserveElement.addEventListener('change', (event) => {
     softReserveElement.classList.add(`${softReserveElement.value}`)
     for(item of itemElements){
         if(item.value === softReserveElement.value){
-            if(softReserveElement.children[0].hasAttribute('hidden')){
+            if(softReserveElement.children[0].hasAttribute('d-none')){
                 softResLabelElement.innerText = 'Soft-Reserve: 1 of 2';
-                softReserveElement.children[0].removeAttribute('hidden');
+                softReserveElement.children[0].removeAttribute('d-none');
                 softReserveElement.children[0].innerText = item.innerText;
                 softReserveElement.children[0].value = item.value;
             }else{
@@ -113,7 +133,7 @@ softReserveElement.addEventListener('change', (event) => {
     }
     if(softReserveElement.classList.length === 2){
         for(item of itemElements){
-            item.setAttribute('hidden', "")
+            item.classList.add('d-none', "")
         }
     }
 });
